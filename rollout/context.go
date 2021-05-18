@@ -71,7 +71,21 @@ func (c *rolloutContext) reconcile() error {
 		return err
 	}
 
+	if c.newRS != nil {
+		c.log.Infof("hkang newRS: %v", c.newRS.Name)
+	}
+	if c.stableRS != nil {
+		c.log.Infof("hkang stableRS: %v", c.stableRS.Name)
+	}
+	if len(c.olderRSs) > 0 {
+		c.log.Infof("hkang olderRSs: %d", len(c.olderRSs))
+	}
+	if len(c.otherRSs) > 0 {
+		c.log.Infof("hkang otherRSs: %d", len(c.otherRSs))
+	}
+
 	if getPauseCondition(c.rollout, v1alpha1.PauseReasonInconclusiveAnalysis) != nil || c.rollout.Spec.Paused || isScalingEvent {
+		c.log.Infof("hkang syncReplicasOnly")
 		return c.syncReplicasOnly(isScalingEvent)
 	}
 

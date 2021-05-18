@@ -21,6 +21,9 @@ func (c *rolloutContext) rolloutBlueGreen() error {
 	if err != nil {
 		return err
 	}
+
+	if 
+
 	c.newRS, err = c.getAllReplicaSetsAndSyncRevision(true)
 	if err != nil {
 		return err
