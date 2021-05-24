@@ -109,6 +109,7 @@ func (s *AnalysisSuite) TestCanaryInlineMultipleAnalysis() {
 		Then().
 		ExpectAnalysisRunCount(1)
 }
+
 // TestBlueGreenAnalysis tests blue-green with pre/post analysis and then fast-tracked rollback
 func (s *AnalysisSuite) TestBlueGreenAnalysis() {
 	original := `
@@ -651,7 +652,6 @@ func (s *AnalysisSuite) TestAnalysisWithSecret() {
 		Then().
 		ExpectStableRevision("2")
 }
-
 
 func (s *AnalysisSuite) TestAnalysisWithArgs() {
 	s.Given().
