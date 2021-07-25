@@ -9,21 +9,21 @@
       
       
       
-        <link rel="canonical" href="https://argoproj.github.io/argo-rollouts/concepts/">
+        <link rel="canonical" href="https://argoproj.github.io/argo-rollouts/features/scaledown-aborted-rs/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
     
     
       
-        <title>Concepts - Argo Rollouts - Kubernetes Progressive Delivery Controller</title>
+        <title>Scaledown New Replicaset on Aborted Rollout - Argo Rollouts - Kubernetes Progressive Delivery Controller</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ba0d045b.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
         
           
           
@@ -59,7 +59,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#concepts" class="md-skip">
+        <a href="#scaledown-new-replicaset-on-aborted-rollout" class="md-skip">
           Skip to content
         </a>
       
@@ -78,9 +78,9 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Argo Rollouts - Kubernetes Progressive Delivery Controller" class="md-header__button md-logo" aria-label="Argo Rollouts - Kubernetes Progressive Delivery Controller" data-md-component="logo">
+    <a href="../.." title="Argo Rollouts - Kubernetes Progressive Delivery Controller" class="md-header__button md-logo" aria-label="Argo Rollouts - Kubernetes Progressive Delivery Controller" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Concepts
+              Scaledown New Replicaset on Aborted Rollout
             
           </span>
         </div>
@@ -174,9 +174,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Argo Rollouts - Kubernetes Progressive Delivery Controller" class="md-nav__button md-logo" aria-label="Argo Rollouts - Kubernetes Progressive Delivery Controller" data-md-component="logo">
+    <a href="../.." title="Argo Rollouts - Kubernetes Progressive Delivery Controller" class="md-nav__button md-logo" aria-label="Argo Rollouts - Kubernetes Progressive Delivery Controller" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     Argo Rollouts - Kubernetes Progressive Delivery Controller
@@ -205,7 +205,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Overview
       </a>
     </li>
@@ -220,7 +220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         Installation
       </a>
     </li>
@@ -233,99 +233,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Concepts
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
         Concepts
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rollout" class="md-nav__link">
-    Rollout
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#progressive-delivery" class="md-nav__link">
-    Progressive Delivery
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deployment-strategies" class="md-nav__link">
-    Deployment Strategies
-  </a>
-  
-    <nav class="md-nav" aria-label="Deployment Strategies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rolling-update" class="md-nav__link">
-    Rolling Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#recreate" class="md-nav__link">
-    Recreate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#blue-green" class="md-nav__link">
-    Blue-Green
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#canary" class="md-nav__link">
-    Canary
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -338,7 +250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         Architecture
       </a>
     </li>
@@ -374,7 +286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         Basic Usage
       </a>
     </li>
@@ -386,7 +298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/ambassador/" class="md-nav__link">
+      <a href="../../getting-started/ambassador/" class="md-nav__link">
         Ambassador
       </a>
     </li>
@@ -398,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/alb/" class="md-nav__link">
+      <a href="../../getting-started/alb/" class="md-nav__link">
         AWS ALB
       </a>
     </li>
@@ -410,7 +322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/istio/" class="md-nav__link">
+      <a href="../../getting-started/istio/" class="md-nav__link">
         Istio
       </a>
     </li>
@@ -422,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/nginx/" class="md-nav__link">
+      <a href="../../getting-started/nginx/" class="md-nav__link">
         NGINX
       </a>
     </li>
@@ -434,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/smi/" class="md-nav__link">
+      <a href="../../getting-started/smi/" class="md-nav__link">
         SMI
       </a>
     </li>
@@ -455,7 +367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dashboard/" class="md-nav__link">
+      <a href="../../dashboard/" class="md-nav__link">
         Dashboard
       </a>
     </li>
@@ -512,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/bluegreen/" class="md-nav__link">
+      <a href="../bluegreen/" class="md-nav__link">
         BlueGreen
       </a>
     </li>
@@ -524,7 +436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/canary/" class="md-nav__link">
+      <a href="../canary/" class="md-nav__link">
         Canary
       </a>
     </li>
@@ -542,7 +454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/specification/" class="md-nav__link">
+      <a href="../specification/" class="md-nav__link">
         Rollout Spec
       </a>
     </li>
@@ -554,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/hpa-support/" class="md-nav__link">
+      <a href="../hpa-support/" class="md-nav__link">
         HPA
       </a>
     </li>
@@ -566,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/ephemeral-metadata/" class="md-nav__link">
+      <a href="../ephemeral-metadata/" class="md-nav__link">
         Ephemeral Metadata
       </a>
     </li>
@@ -578,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/restart/" class="md-nav__link">
+      <a href="../restart/" class="md-nav__link">
         Restarting Rollouts
       </a>
     </li>
@@ -590,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/anti-affinity/anti-affinity/" class="md-nav__link">
+      <a href="../anti-affinity/anti-affinity/" class="md-nav__link">
         Anti Affinity
       </a>
     </li>
@@ -602,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/helm/" class="md-nav__link">
+      <a href="../helm/" class="md-nav__link">
         Helm
       </a>
     </li>
@@ -614,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/kustomize/" class="md-nav__link">
+      <a href="../kustomize/" class="md-nav__link">
         Kustomize
       </a>
     </li>
@@ -626,7 +538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/controller-metrics/" class="md-nav__link">
+      <a href="../controller-metrics/" class="md-nav__link">
         Controller Metrics
       </a>
     </li>
@@ -668,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/" class="md-nav__link">
+      <a href="../traffic-management/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -680,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/ambassador/" class="md-nav__link">
+      <a href="../traffic-management/ambassador/" class="md-nav__link">
         Ambassador
       </a>
     </li>
@@ -692,7 +604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/alb/" class="md-nav__link">
+      <a href="../traffic-management/alb/" class="md-nav__link">
         AWS ALB
       </a>
     </li>
@@ -704,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/istio/" class="md-nav__link">
+      <a href="../traffic-management/istio/" class="md-nav__link">
         Istio
       </a>
     </li>
@@ -716,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/nginx/" class="md-nav__link">
+      <a href="../traffic-management/nginx/" class="md-nav__link">
         NGINX
       </a>
     </li>
@@ -728,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/traffic-management/smi/" class="md-nav__link">
+      <a href="../traffic-management/smi/" class="md-nav__link">
         SMI
       </a>
     </li>
@@ -770,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/analysis/" class="md-nav__link">
+      <a href="../analysis/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -782,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/prometheus/" class="md-nav__link">
+      <a href="../../analysis/prometheus/" class="md-nav__link">
         Prometheus
       </a>
     </li>
@@ -794,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/datadog/" class="md-nav__link">
+      <a href="../../analysis/datadog/" class="md-nav__link">
         DataDog
       </a>
     </li>
@@ -806,7 +718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/newrelic/" class="md-nav__link">
+      <a href="../../analysis/newrelic/" class="md-nav__link">
         NewRelic
       </a>
     </li>
@@ -818,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/wavefront/" class="md-nav__link">
+      <a href="../../analysis/wavefront/" class="md-nav__link">
         Wavefront
       </a>
     </li>
@@ -830,7 +742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/job/" class="md-nav__link">
+      <a href="../../analysis/job/" class="md-nav__link">
         Job
       </a>
     </li>
@@ -842,7 +754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/web/" class="md-nav__link">
+      <a href="../../analysis/web/" class="md-nav__link">
         Web
       </a>
     </li>
@@ -854,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../analysis/kayenta/" class="md-nav__link">
+      <a href="../../analysis/kayenta/" class="md-nav__link">
         Kayenta
       </a>
     </li>
@@ -875,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/experiment/" class="md-nav__link">
+      <a href="../experiment/" class="md-nav__link">
         Experiments
       </a>
     </li>
@@ -911,7 +823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/notifications/" class="md-nav__link">
+      <a href="../notifications/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -944,7 +856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/email/" class="md-nav__link">
+      <a href="../../generated/notification-services/email/" class="md-nav__link">
         Email
       </a>
     </li>
@@ -956,7 +868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/github/" class="md-nav__link">
+      <a href="../../generated/notification-services/github/" class="md-nav__link">
         GitHub
       </a>
     </li>
@@ -968,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/grafana/" class="md-nav__link">
+      <a href="../../generated/notification-services/grafana/" class="md-nav__link">
         Grafana
       </a>
     </li>
@@ -980,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/mattermost/" class="md-nav__link">
+      <a href="../../generated/notification-services/mattermost/" class="md-nav__link">
         Mattermost
       </a>
     </li>
@@ -992,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/opsgenie/" class="md-nav__link">
+      <a href="../../generated/notification-services/opsgenie/" class="md-nav__link">
         Opsgenie
       </a>
     </li>
@@ -1004,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/overview/" class="md-nav__link">
+      <a href="../../generated/notification-services/overview/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1016,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/rocketchat/" class="md-nav__link">
+      <a href="../../generated/notification-services/rocketchat/" class="md-nav__link">
         Rocket.Chat
       </a>
     </li>
@@ -1028,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/slack/" class="md-nav__link">
+      <a href="../../generated/notification-services/slack/" class="md-nav__link">
         Slack
       </a>
     </li>
@@ -1040,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/teams/" class="md-nav__link">
+      <a href="../../generated/notification-services/teams/" class="md-nav__link">
         Teams
       </a>
     </li>
@@ -1052,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/telegram/" class="md-nav__link">
+      <a href="../../generated/notification-services/telegram/" class="md-nav__link">
         Telegram
       </a>
     </li>
@@ -1064,7 +976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/notification-services/webhook/" class="md-nav__link">
+      <a href="../../generated/notification-services/webhook/" class="md-nav__link">
         Webhook
       </a>
     </li>
@@ -1112,7 +1024,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/kubectl-plugin/" class="md-nav__link">
+      <a href="../kubectl-plugin/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1145,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts/" class="md-nav__link">
         Rollouts
       </a>
     </li>
@@ -1157,7 +1069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/" class="md-nav__link">
         Rollouts Abort
       </a>
     </li>
@@ -1169,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_create/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_create/" class="md-nav__link">
         Rollouts Create
       </a>
     </li>
@@ -1181,7 +1093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_create_analysisrun/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_create_analysisrun/" class="md-nav__link">
         Rollouts Create Analysisrun
       </a>
     </li>
@@ -1193,7 +1105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_dashboard/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_dashboard/" class="md-nav__link">
         Rollouts Dashboard
       </a>
     </li>
@@ -1205,7 +1117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get/" class="md-nav__link">
         Rollouts Get
       </a>
     </li>
@@ -1217,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get_experiment/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get_experiment/" class="md-nav__link">
         Rollouts Get Experiment
       </a>
     </li>
@@ -1229,7 +1141,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get_rollout/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_get_rollout/" class="md-nav__link">
         Rollouts Get Rollout
       </a>
     </li>
@@ -1241,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_lint/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_lint/" class="md-nav__link">
         Rollouts Lint
       </a>
     </li>
@@ -1253,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list/" class="md-nav__link">
         Rollouts List
       </a>
     </li>
@@ -1265,7 +1177,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list_experiments/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list_experiments/" class="md-nav__link">
         Rollouts List Experiments
       </a>
     </li>
@@ -1277,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list_rollouts/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_list_rollouts/" class="md-nav__link">
         Rollouts List Rollouts
       </a>
     </li>
@@ -1289,7 +1201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications/" class="md-nav__link">
         Rollouts Notifications
       </a>
     </li>
@@ -1301,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template/" class="md-nav__link">
         Rollouts Notifications Template
       </a>
     </li>
@@ -1313,7 +1225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template_get/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template_get/" class="md-nav__link">
         Rollouts Notifications Template Get
       </a>
     </li>
@@ -1325,7 +1237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template_notify/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_template_notify/" class="md-nav__link">
         Rollouts Notifications Template Notify
       </a>
     </li>
@@ -1337,7 +1249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger/" class="md-nav__link">
         Rollouts Notifications Trigger
       </a>
     </li>
@@ -1349,7 +1261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger_get/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger_get/" class="md-nav__link">
         Rollouts Notifications Trigger Get
       </a>
     </li>
@@ -1361,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger_run/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_notifications_trigger_run/" class="md-nav__link">
         Rollouts Notifications Trigger Run
       </a>
     </li>
@@ -1373,7 +1285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_pause/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_pause/" class="md-nav__link">
         Rollouts Pause
       </a>
     </li>
@@ -1385,7 +1297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/" class="md-nav__link">
         Rollouts Promote
       </a>
     </li>
@@ -1397,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_restart/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_restart/" class="md-nav__link">
         Rollouts Restart
       </a>
     </li>
@@ -1409,7 +1321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/" class="md-nav__link">
         Rollouts Retry
       </a>
     </li>
@@ -1421,7 +1333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry_experiment/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry_experiment/" class="md-nav__link">
         Rollouts Retry Experiment
       </a>
     </li>
@@ -1433,7 +1345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry_rollout/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry_rollout/" class="md-nav__link">
         Rollouts Retry Rollout
       </a>
     </li>
@@ -1445,7 +1357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_set/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_set/" class="md-nav__link">
         Rollouts Set
       </a>
     </li>
@@ -1457,7 +1369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_set_image/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_set_image/" class="md-nav__link">
         Rollouts Set Image
       </a>
     </li>
@@ -1469,7 +1381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_status/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_status/" class="md-nav__link">
         Rollouts Status
       </a>
     </li>
@@ -1481,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate/" class="md-nav__link">
         Rollouts Terminate
       </a>
     </li>
@@ -1493,7 +1405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate_analysisrun/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate_analysisrun/" class="md-nav__link">
         Rollouts Terminate Analysisrun
       </a>
     </li>
@@ -1505,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate_experiment/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_terminate_experiment/" class="md-nav__link">
         Rollouts Terminate Experiment
       </a>
     </li>
@@ -1517,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_undo/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_undo/" class="md-nav__link">
         Rollouts Undo
       </a>
     </li>
@@ -1529,7 +1441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_version/" class="md-nav__link">
+      <a href="../../generated/kubectl-argo-rollouts/kubectl-argo-rollouts_version/" class="md-nav__link">
         Rollouts Version
       </a>
     </li>
@@ -1556,7 +1468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../best-practices/" class="md-nav__link">
+      <a href="../../best-practices/" class="md-nav__link">
         Best Practices
       </a>
     </li>
@@ -1571,7 +1483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../migrating/" class="md-nav__link">
+      <a href="../../migrating/" class="md-nav__link">
         Migrating
       </a>
     </li>
@@ -1586,7 +1498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../FAQ/" class="md-nav__link">
+      <a href="../../FAQ/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -1601,7 +1513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/" class="md-nav__link">
+      <a href="../../security/" class="md-nav__link">
         Security
       </a>
     </li>
@@ -1616,7 +1528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/" class="md-nav__link">
+      <a href="../../roadmap/" class="md-nav__link">
         Roadmap
       </a>
     </li>
@@ -1652,7 +1564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CONTRIBUTING/" class="md-nav__link">
+      <a href="../../CONTRIBUTING/" class="md-nav__link">
         Contribution Guide
       </a>
     </li>
@@ -1664,7 +1576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/setup/" class="md-nav__link">
+      <a href="../../getting-started/setup/" class="md-nav__link">
         Environment Setup
       </a>
     </li>
@@ -1676,7 +1588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../releasing/" class="md-nav__link">
+      <a href="../../releasing/" class="md-nav__link">
         Releasing
       </a>
     </li>
@@ -1753,69 +1665,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rollout" class="md-nav__link">
-    Rollout
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#progressive-delivery" class="md-nav__link">
-    Progressive Delivery
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deployment-strategies" class="md-nav__link">
-    Deployment Strategies
-  </a>
-  
-    <nav class="md-nav" aria-label="Deployment Strategies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rolling-update" class="md-nav__link">
-    Rolling Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#recreate" class="md-nav__link">
-    Recreate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#blue-green" class="md-nav__link">
-    Blue-Green
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#canary" class="md-nav__link">
-    Canary
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1826,47 +1675,76 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/argoproj/argo-rollouts/edit/master/docs/concepts.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/argoproj/argo-rollouts/edit/master/docs/features/scaledown-aborted-rs.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h1>
-<h2 id="rollout">Rollout<a class="headerlink" href="#rollout" title="Permanent link">&para;</a></h2>
-<p>A Rollout is Kubernetes workload resource which is equivalent to a Kubernetes Deployment object.
-It is intended to replace a Deployment object in scenarios when more advanced deployment or 
-progressive delivery functionality is needed. A Rollout provides the following features which
-a Kubernetes Deployment cannot:</p>
-<ul>
-<li>blue-green deployments</li>
-<li>canary deployments</li>
-<li>integration with ingress controllers and service meshes for advanced traffic routing</li>
-<li>integration with metric providers for blue-green &amp; canary analysis</li>
-<li>automated promotion or rollback based on successful or failed metrics</li>
-</ul>
-<h2 id="progressive-delivery">Progressive Delivery<a class="headerlink" href="#progressive-delivery" title="Permanent link">&para;</a></h2>
-<p>Progressive delivery is the process of releasing updates of a product in a controlled and gradual
-manner, thereby reducing the risk of the release, typically coupling automation and metric analysis
-to drive the automated promotion or rollback of the update. </p>
-<p>Progressive delivery is often described as an evolution of continuous delivery, extending the
-speed benefits made in CI/CD to the deployment process. This is accomplished by limiting the
-exposure of the new version to a subset of users, observing and analyzing for correct behavior, 
-then progressively increasing the exposure to a broader and wider audience while continuously
-verifying correctness.</p>
-<h2 id="deployment-strategies">Deployment Strategies<a class="headerlink" href="#deployment-strategies" title="Permanent link">&para;</a></h2>
-<p>While the industry has used a consistent terminology to describe various deployment strategies, the implementations of these strategies tend to differ across tooling. To make it clear how the Argo Rollouts will behave, here are the descriptions of the various deployment strategies implementations offered by the Argo Rollouts.</p>
-<h3 id="rolling-update">Rolling Update<a class="headerlink" href="#rolling-update" title="Permanent link">&para;</a></h3>
-<p>A <code>RollingUpdate</code> slowly replaces the old version with the new version. As the new version comes up, the old version is scaled down in order to maintain the overall count of the application. This is the default strategy of the Deployment object.</p>
-<h3 id="recreate">Recreate<a class="headerlink" href="#recreate" title="Permanent link">&para;</a></h3>
-<p>A Recreate deployment deletes the old version of the application before bring up the new version. As a result, this ensures that two versions of the application never run at the same time, but there is downtime during the deployment.</p>
-<h3 id="blue-green">Blue-Green<a class="headerlink" href="#blue-green" title="Permanent link">&para;</a></h3>
-<p>A Blue-Green deployment (sometimes referred to as a Red-Black) has both the new and old version of the application deployed at the same time.  During this time, only the old version of the application will receive production traffic. This allows the developers to run tests against the new version before switching the live traffic to the new version.</p>
-<p><a href="../concepts-assets/blue-green-deployments.png"><img alt="How Blue Green deployments work" src="../concepts-assets/blue-green-deployments.png" /></a></p>
-<h3 id="canary">Canary<a class="headerlink" href="#canary" title="Permanent link">&para;</a></h3>
-<p>A Canary deployment exposes a subset of users to the new version of the application while serving the rest of the traffic to the old version. Once the new version is verified to be correct, the new version can gradually replace the old version. Ingress controllers and service meshes such as NGINX and Istio, enable more sophisticated traffic shaping patterns for canarying than what is natively available (e.g. achieving very fine-grained traffic splitting, or splitting based on HTTP headers).</p>
-<p><a href="../concepts-assets/canary-deployments.png"><img alt="How Canary deployments work" src="../concepts-assets/canary-deployments.png" /></a></p>
-<p>The picture above shows a canary with two stages (10% and 33% of traffic goes to new version) but this is just an example. With Argo Rollouts you can define the exact number of stages
-and percentages of traffic according to your use case.</p>
+                <h1 id="scaledown-new-replicaset-on-aborted-rollout">Scaledown New Replicaset on Aborted Rollout<a class="headerlink" href="#scaledown-new-replicaset-on-aborted-rollout" title="Permanent link">&para;</a></h1>
+<p>Upon an aborted update, we may scale down the new replicaset for all strategies. Users can then choose to leave the new replicaset scaled up indefinitely by setting abortScaleDownDelaySeconds to 0, or adjust the value to something larger (or smaller).</p>
+<p>The following table summarizes the behavior under combinations of rollout strategy and <code>abortScaleDownDelaySeconds</code>. Note that <code>abortScaleDownDelaySeconds</code> is not applicable to argo-rollouts v1.0.
+<code>abortScaleDownDelaySeconds = nil</code> is the default, which means in v1.1 across all rollout strategies, the new replicaset
+is scaled down in 30 seconds on abort by default.</p>
+<table>
+<thead>
+<tr>
+<th align="right">strategy</th>
+<th align="center">v1.0 behavior</th>
+<th align="center">abortScaleDownDelaySeconds</th>
+<th align="center">v1.1 behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">blue-green</td>
+<td align="center">does not scale down</td>
+<td align="center">nil</td>
+<td align="center">scales down after 30 seconds</td>
+</tr>
+<tr>
+<td align="right">blue-green</td>
+<td align="center">does not scale down</td>
+<td align="center">0</td>
+<td align="center">does not scale down</td>
+</tr>
+<tr>
+<td align="right">blue-green</td>
+<td align="center">does not scale down</td>
+<td align="center">N</td>
+<td align="center">scales down after N seconds</td>
+</tr>
+<tr>
+<td align="right">basic canary</td>
+<td align="center">rolling update back to stable</td>
+<td align="center">N/A</td>
+<td align="center">rolling update back to stable</td>
+</tr>
+<tr>
+<td align="right">canary w/ traffic routing</td>
+<td align="center">scales down immediately</td>
+<td align="center">nil</td>
+<td align="center">scales down after 30 seconds</td>
+</tr>
+<tr>
+<td align="right">canary w/ traffic routing</td>
+<td align="center">scales down immediately</td>
+<td align="center">0</td>
+<td align="center">does not scale down</td>
+</tr>
+<tr>
+<td align="right">canary w/ traffic routing</td>
+<td align="center">scales down immediately</td>
+<td align="center">N</td>
+<td align="center">scales down after N seconds</td>
+</tr>
+<tr>
+<td align="right">canary w/ traffic routing  + setCanaryScale</td>
+<td align="center">does not scale down (bug)</td>
+<td align="center">*</td>
+<td align="center">should behave like  canary w/ traffic routing</td>
+</tr>
+</tbody>
+</table>
                 
               
               
@@ -1882,41 +1760,6 @@ and percentages of traffic according to your use case.</p>
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Installation
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Architecture" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Architecture
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1937,10 +1780,10 @@ and percentages of traffic according to your use case.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.716f8af4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.716f8af4.min.js"></script>
       
     
   </body>
