@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://argoproj.github.io/argo-rollouts/features/analysis/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
     
     
       
@@ -901,6 +901,19 @@
   <a href="#measurements-retention" class="md-nav__link">
     Measurements Retention
   </a>
+  
+    <nav class="md-nav" aria-label="Measurements Retention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#measurements-retention-for-rollouts-analysis" class="md-nav__link">
+    Measurements Retention for Rollouts Analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2272,6 +2285,19 @@
     Measurements Retention
   </a>
   
+    <nav class="md-nav" aria-label="Measurements Retention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#measurements-retention-for-rollouts-analysis" class="md-nav__link">
+    Measurements Retention for Rollouts Analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2774,9 +2800,8 @@ templates together. The controller combines the <code>metrics</code> and <code>a
 <span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="nt">podTemplateHashValue</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Latest</span><span class="w"></span>
 </code></pre></div>
-Analysis arguments also support valueFrom for reading any Rollout fields and passing them as arguments to AnalysisTemplate.
-An example would be to reference metadata labels like env and region and passing them along to AnalysisTemplate, or any field
-from the Rollout status
+Analysis arguments also support valueFrom for reading metadata fields and passing them as arguments to AnalysisTemplate.
+An example would be to reference metadata labels like env and region and passing them along to AnalysisTemplate.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span><span class="w"></span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rollout</span><span class="w"></span>
 <span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
@@ -2805,10 +2830,37 @@ from the Rollout status
 <span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w"></span>
 <span class="w">              </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metadata.labels[&#39;region&#39;]</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">canary-hash</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Available since v1.2</p>
+</div>
+<p>Analysis arguments also support valueFrom for reading any field from Rollout status and passing them as arguments to AnalysisTemplate.
+Following example references Rollout status field like aws canaryTargetGroup name and passing them along to AnalysisTemplate</p>
+<p>from the Rollout status
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span><span class="w"></span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rollout</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guestbook</span><span class="w"></span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">appType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">demo-app</span><span class="w"></span>
+<span class="w">    </span><span class="nt">buildType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-app</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span><span class="w"></span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-west-2</span><span class="w"></span>
+<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
+<span class="nn">...</span><span class="w"></span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">canary</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">analysis</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">templates</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">templateName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">args-example</span><span class="w"></span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">canary-targetgroup-name</span><span class="w"></span>
 <span class="w">          </span><span class="nt">valueFrom</span><span class="p">:</span><span class="w"></span>
 <span class="w">            </span><span class="nt">fieldRef</span><span class="p">:</span><span class="w"></span>
-<span class="w">              </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status.canary.weights.canary.podTemplateHash</span><span class="w"></span>
+<span class="w">              </span><span class="nt">fieldPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status.alb.canaryTargetGroup.name</span><span class="w"></span>
 </code></pre></div></p>
 <h2 id="bluegreen-pre-promotion-analysis">BlueGreen Pre Promotion Analysis<a class="headerlink" href="#bluegreen-pre-promotion-analysis" title="Permanent link">&para;</a></h2>
 <p>A Rollout using the BlueGreen strategy can launch an AnalysisRun <em>before</em> it switches traffic to the new version using
@@ -3062,6 +3114,22 @@ example, the controller will retain the latest twenty run results for all the me
 <span class="w">            </span><span class="no">istio_requests_total{reporter=&quot;source&quot;,destination_service=~&quot;{{args.service-name}}&quot;,response_code~&quot;4.*&quot;}[5m]</span><span class="w"></span>
 <span class="w">          </span><span class="no">))</span><span class="w"></span>
 </code></pre></div>
+<h3 id="measurements-retention-for-rollouts-analysis">Measurements Retention for Rollouts Analysis<a class="headerlink" href="#measurements-retention-for-rollouts-analysis" title="Permanent link">&para;</a></h3>
+<p>If a rollout wants to retain more results of its analysis metrics, it simply needs to specify the <code>measurementRetention</code> 
+field to its <code>analysis</code> stanza. In the following example, all the metrics from <code>random-fail</code> and <code>always-pass</code> get 
+merged, and their latest twenty measurements get retained instead of the default ten.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rollout</span><span class="w"></span>
+<span class="nt">spec</span><span class="p">:</span><span class="w"></span>
+<span class="nn">...</span><span class="w"></span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">analysis</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">templates</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">templateName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">random-fail</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">templateName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always-pass</span><span class="w"></span>
+<span class="hll"><span class="w">      </span><span class="nt">measurementRetention</span><span class="p">:</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">metricName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.*</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
+</span></code></pre></div>
 <h2 id="inconclusive-runs">Inconclusive Runs<a class="headerlink" href="#inconclusive-runs" title="Permanent link">&para;</a></h2>
 <p>Analysis runs can also be considered <code>Inconclusive</code>, which indicates the run was neither successful,
 nor failed. Inconclusive runs causes a rollout to become paused at its current step. Manual
@@ -3359,7 +3427,7 @@ to handle these cases accordingly.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.1514a9a0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.01de222e.min.js"></script>
       
         <script src="../../assets/versions.js"></script>
       
